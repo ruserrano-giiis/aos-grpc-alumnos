@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+service SensorService {
+  // Stream de servidor
+  rpc GetTemperature(TemperatureRequest) returns (stream TemperatureReading);
+  // Stream de client
+  rpc NotifyTemperature(stream SensorTemperatureReading) returns (SensorTemperatureResponse);
+  // Stream bidireccional
+  rpc CheckActuatorStatus(stream SensorTemperatureReading) returns (stream ActuatorStatus);
+}
+
+message TemperatureRequest {
+  int32 sensorId = 1;
+}
+
+message TemperatureReading {
+  float temperature = 1;
+}
+
+message SensorTemperatureReading {
+  int32 id = 1;
+  float temperature = 2;
+}
+
+message SensorTemperatureResponse {
+  int32 count = 1;
+}
+
+message ActuatorStatus {
+  bool enabled = 1;
+}
