@@ -12,11 +12,10 @@ public class ClientController {
     private static ClientController instance = null;
 
     private ClientController() {
-        String target = "localhost:50051"; // TODO: CAMBIAR URL AQUI
+        String target = "localhost:50051"; // CAMBIAR URL AQUI
         ManagedChannel channel = Grpc.newChannelBuilder(target, InsecureChannelCredentials.create())
                 .build();
-        // TODO: Instanciar stub
-        serviceStub = null;
+        this.serviceStub = ChatServiceGrpc.newStub(channel);
     }
 
     public static ClientController getClientController() {
@@ -27,22 +26,31 @@ public class ClientController {
     }
 
     public void ping(ValueCallback<Boolean> onResult) {
-        // TODO: Implementar
+        final Chat.EmptyMessage request = Chat.EmptyMessage.newBuilder().build();
+        serviceStub.ping(request, new PingCallback(onResult));
     }
 
     public void getUsers(ValueCallback<List<String>> onResult) {
-        // TODO: Implementar
+        final Chat.EmptyMessage request = Chat.EmptyMessage.newBuilder().build();
+        serviceStub.getUsers(request, new GetUsersCallback(onResult));
     }
 
     public void sendMessage(String username, String message, ValueCallback<Boolean> onComplete) {
-        // TODO: Implementar
+        final Chat.SentChatMessage sentChatMessage = Chat.SentChatMessage
+                .newBuilder()
+                .setUser(username)
+                .setMessage(message)
+                .build();
+        serviceStub.sendMessage(sentChatMessage, new SendCallback(onComplete));
     }
 
     public void subscribe(String username, ValueCallback<Chat.ReceivedChatMessage> onValue) {
-        // TODO: Implementar
+        final Chat.UsernameMessage usernameMessage = Chat.UsernameMessage.newBuilder().setUsername(username).build();
+        serviceStub.subscribe(usernameMessage, new SubscribeCallback(onValue));
     }
 
     public void unsubscribe(String username, ValueCallback<Boolean> onValue) {
-        // TODO: Implementar
+        final Chat.UsernameMessage usernameMessage = Chat.UsernameMessage.newBuilder().setUsername(username).build();
+        serviceStub.unsubscribe(usernameMessage, new UnsubscribeCallback(onValue));
     }
 }

@@ -5,31 +5,36 @@ import es.unex.giiis.aos.grpc.generated.ChatServiceGrpc;
 import io.grpc.StatusException;
 import io.grpc.stub.StreamObserver;
 
-import java.util.List;
-
 public class ChatServerImpl extends ChatServiceGrpc.ChatServiceImplBase {
 
     private final ChatServerService service = ChatServerService.get();
 
     @Override
     public void ping(EmptyMessage request, StreamObserver<PongMessage> responseObserver) {
-        // TODO: Implementar ping
+        final PongMessage pong = PongMessage.newBuilder().build();
+        responseObserver.onNext(pong);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void getUsers(EmptyMessage request, StreamObserver<UsersResponse> responseObserver) {
-        final List<String> subscribers = service.getSubscribers();
-        // TODO: Implementar getUsers
+        final UsersResponse usersResponse = UsersResponse.newBuilder()
+                .addAllUsers(service.getSubscribers())
+                .build();
+        responseObserver.onNext(usersResponse);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void sendMessage(SentChatMessage request, StreamObserver<EmptyMessage> responseObserver) {
+        final String username = request.getUser();
+        final String message = request.getMessage();
+
         try {
-            // TODO: Obtener datos de la petición
-            final String username = "";
-            final String message = "";
             service.send(username, message);
-            // TODO: Implementar sendMessage
+
+            responseObserver.onNext(EmptyMessage.newBuilder().build());
+            responseObserver.onCompleted();
         } catch (StatusException e) {
             responseObserver.onError(e);
         }
@@ -37,9 +42,8 @@ public class ChatServerImpl extends ChatServiceGrpc.ChatServiceImplBase {
 
     @Override
     public void subscribe(UsernameMessage request, StreamObserver<ReceivedChatMessage> responseObserver) {
+        final String username = request.getUsername();
         try {
-            // TODO: Obtener datos de la petición
-            final String username = "";
             service.subscribe(username, responseObserver);
         } catch (StatusException e) {
             responseObserver.onError(e);
@@ -48,11 +52,11 @@ public class ChatServerImpl extends ChatServiceGrpc.ChatServiceImplBase {
 
     @Override
     public void unsubscribe(UsernameMessage request, StreamObserver<EmptyMessage> responseObserver) {
+        final String username = request.getUsername();
         try {
-            // TODO: Obtener datos de la petición
-            final String username = "";
-            StreamObserver<ReceivedChatMessage> subscriptionHandler = service.unsubscribe(username);
-            // TODO: Implementar unsubscribe
+            service.unsubscribe(username).onCompleted();
+            responseObserver.onNext(EmptyMessage.newBuilder().build());
+            responseObserver.onCompleted();
         } catch (StatusException e) {
             responseObserver.onError(e);
         }
