@@ -1,6 +1,15 @@
+# Inicio
+
+Realizaremos una aplicación de chat sentilla utilizando grpc para la comunicación entre lciente y servidor
+
+El proyecto cuenta con 3 módulos:
+ * `protos`: Módulo auxiliar que configura la generación de código y hace de librería del código generado
+ * `server`: Código relativo al servidor de chat
+ * `client`: Código relativo al cliente de chat
+
 # Guión
 
-En este ejercicio trabajaremos con un proyecto generado a partir de un fichero ```.proto``` para una aplicación de chat, basándonos en el resto del código de la aplicación tendremos que definir los mensajes y servicios que componen el fichero.
+Trabajaremos con un proyecto generado a partir de un fichero ```.proto``` sobre el cual,  basándonos en el resto del código de la aplicación tendremos que definir los mensajes y servicios que componen el fichero.
 
 Para completar el archivo ```.proto``` deben seguirse los siguientes casos de uso:
 1. Realizar ping al servidor, el cual responderá con un pong, tanto el mensaje enviado por el cliente como por el servidor estarán vacios.

@@ -7,6 +7,7 @@ import io.grpc.stub.StreamObserver;
 
 import java.util.List;
 
+/** Implementación del servicio grpc */
 public class ChatServerImpl extends ChatServiceGrpc.ChatServiceImplBase {
 
     private final ChatServerService service = ChatServerService.get();

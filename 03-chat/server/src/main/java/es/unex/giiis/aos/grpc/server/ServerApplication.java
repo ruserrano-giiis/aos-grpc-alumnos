@@ -15,11 +15,11 @@ public class ServerApplication {
     private Server server;
 
     private void start() throws IOException {
-        /* The port on which the server should run */
+        // Inicialización de servidor con la implementación de grpc
         int port = 50051;
         server = Grpc.newServerBuilderForPort(port, InsecureServerCredentials.create())
                 .addService(ProtoReflectionService.newInstance())
-                .addService(new ChatServerImpl())
+                .addService(new ChatServerImpl()) // Se añade al servidor la implementación del servicio
                 .build()
                 .start();
         logger.info("Server started, listening on " + port);

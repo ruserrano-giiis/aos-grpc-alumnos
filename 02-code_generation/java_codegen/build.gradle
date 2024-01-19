@@ -1,6 +1,7 @@
 plugins {
     id "java"
     id "application"
+    // Activación del plugin de protocol buffers
     id "com.google.protobuf" version "0.9.4"
 }
 
@@ -21,22 +22,27 @@ application {
 }
 
 dependencies {
+    // Dependencias de grpc
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"
     implementation "io.grpc:grpc-services:${grpcVersion}"
     implementation "io.grpc:grpc-stub:${grpcVersion}"
     compileOnly "org.apache.tomcat:annotations-api:6.0.53"
 
+    // Implementación del servidor grpc
     runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
+// Configuración de la generación de código
 protobuf {
     protoc {
+        // Configuración de la versión de protoc a utilizar
         artifact = "com.google.protobuf:protoc:${protobufVersion}"
     }
     plugins {
+        // Configuración de la generación de código de grpc
         grpc { artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}" }
     }
     generateProtoTasks {
@@ -46,9 +52,11 @@ protobuf {
 
 sourceSets {
     main {
+        // Se define la carpeta con los .proto como fuente para protobuf
         proto {
             srcDirs '../protos'
         }
+        // Se añaden a las fuentes de código las carpetas en las que se genera el código de grpc
         java {
             srcDirs 'build/generated/source/proto/main/grpc'
             srcDirs 'build/generated/source/proto/main/java'
