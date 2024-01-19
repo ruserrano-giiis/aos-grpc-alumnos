@@ -1,13 +1,20 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "es.unex.giiis.aos.grpc.example.generated";
+// en este ejemplo para la generación de código tenemos un proto que contiene, además de lo visto en la carpeta de ejemplos, 
+// una serie de opciones que se pueden añadir al archivo, en este caso:
+
+option java_multiple_files = true; // que la generación se realice en más de un archivo (uno por clase especificada en este archivo).
+option java_package = "es.unex.giiis.aos.grpc.example.generated"; // y el paquete donde debe generarlo.
+
+// aqui tenemos la especificación del servicio generado, que combina los archivos proto de los ejemplos de la carpeta anterior.
 
 service ExampleService {
   rpc GetEcho(EchoMessage) returns (EchoMessage);
   rpc GetRandom(RandomRequest) returns (stream RandomResponse);
   rpc StreamingEcho(stream EchoMessage) returns (stream EchoMessage);
 }
+
+// a partir de aqui los tipos de datos utilizados en los métodos del servicio.
 
 message EchoMessage {
   string message = 1;
