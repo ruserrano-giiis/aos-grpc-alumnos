@@ -4,6 +4,7 @@ import es.unex.giiis.aos.grpc.generated.Chat;
 
 import java.time.LocalDateTime;
 
+// clase para el manejo de los elementos gráficos de los mensajes del chat.
 public class MessageUtils {
     public static String formatMessage(Chat.ReceivedChatMessage message) {
         return String.format("%s - %s: %s\n",

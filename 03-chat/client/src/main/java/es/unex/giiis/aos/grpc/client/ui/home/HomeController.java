@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+// clase para el manejo de los elementos gráficos de la pantalla de bienvenida.
 public class HomeController {
     private final ClientController clientController = ClientController.getClientController();
     public TextField usernameInput;

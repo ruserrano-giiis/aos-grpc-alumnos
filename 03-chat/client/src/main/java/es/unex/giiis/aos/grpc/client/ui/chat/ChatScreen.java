@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
+// clase para el manejo de los elementos gráficos del chat.
 public class ChatScreen extends Scene {
     private static final FXMLLoader loader = new FXMLLoader(HomeScreen.class.getClassLoader().getResource("chat.fxml"));
 

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Date;
 
+// clase principal para el manejo gráfico e inputs del usuario.
 public class InterfaceFX extends Application {
     private final ClientController clientController = ClientController.getClientController();
 

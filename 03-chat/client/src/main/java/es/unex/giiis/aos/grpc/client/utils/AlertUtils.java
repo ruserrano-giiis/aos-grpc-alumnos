@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 
 import java.util.List;
 
+// clase auxiliar para mostrar elementos gráficos adicionales en pantalla (alertas)
 public class AlertUtils {
     public static void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
