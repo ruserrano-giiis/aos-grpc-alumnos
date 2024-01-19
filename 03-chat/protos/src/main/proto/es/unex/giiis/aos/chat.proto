@@ -2,5 +2,6 @@ syntax = "proto3";
 
 option java_package = "es.unex.giiis.aos.grpc.generated";
 
+// archivo proto a rellenar por los alumnos siguiendo el guión del README.md
 service ChatService {
 }

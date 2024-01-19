@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
+// clase para el manejo de los elementos gráficos de la pantalla de bienvenida.
 public class HomeScreen extends Scene {
     private static final FXMLLoader loader = new FXMLLoader(HomeScreen.class.getClassLoader().getResource("home.fxml"));
 
