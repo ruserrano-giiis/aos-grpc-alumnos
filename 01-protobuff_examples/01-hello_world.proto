@@ -1,13 +1,20 @@
 syntax = "proto3";
 
+// Este primer ejemplo se utilizaría para la generación de código de un proyecto que muestre el mensaje Hello World usando protobuf 3.
+// define un servicio con un único método que recibe una request de tipo HelloWorldRequest y devuelve una HelloWorldResponse.
 service HelloWorldService {
+  // definición del método descrito anteriormente.
   rpc SayHello(HelloWorldRequest) returns (HelloWorldResponse);
 }
 
+// este es el modelo de mensaje que se utiliza como respuesta a las llamadas al método SayHello.
+// posee un único campo de tipo cadena llamada mensaje ( = 1 --> primera posición ).
 message HelloWorldResponse {
   string message = 1;
 }
 
+// este es el modelo de mensaje que se utiliza en las llamadas al método SayHello.
+// posee un único campo de tipo cadena llamada name ( = 1 --> primera posición ).
 message HelloWorldRequest {
   string name = 1;
 }

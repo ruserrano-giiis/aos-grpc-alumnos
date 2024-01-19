@@ -1,16 +1,23 @@
 syntax = "proto3";
 
+// este es el tercer ejemplo propuesto para la presentación del material.
+// es un programa que provee de un valor aleatorio (GetRandomResponse) comprendido entre dos números (almacenados en GetRandomRequest).
+
+// aqui la definición del servicio con su método GetRandom.
 service RandomGenerator {
+  // la declaración del método.
   rpc GetRandom(GetRandomRequest) returns (GetRandomResponse);
 }
 
+// aqui se declara el modelo para peticiones, usando dos valores opcionales, en caso de no adjuntarse tomarían el valor 0 (valor por defecto para los int32 en proto3).
 // Suponiendo que la generación sea `value = min + randomNumber*max` necesitamos poder conocer si max está presente o no
-// El valor por defecto en escalares numéricos es 0, lo cual invalidaría el cálculo en caso de no estar presente
+// El valor por defecto en escalares numéricos es 0, lo cual invalidaría el cálculo en caso de no estar presente.
 message GetRandomRequest {
   optional int32 max = 1;
   optional int32 min = 2;
 }
 
+// aqui el modelo para las respuestas, con una variables value de tipo float que almacena el número calculado.
 message GetRandomResponse {
   float value = 1;
 }

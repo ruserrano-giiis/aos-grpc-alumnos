@@ -1,10 +1,13 @@
 syntax = "proto3";
 
+// Este segundo ejemplo se utilizaría para la generación de código de un proyecto de "agenda" en protobuf 3.
 message Person {
+// el modelo persona incluye, en primer lugar, 3 atributos (name, id, email, cada uno con su tipo correspondiente).
   string name = 1;
   int32 id = 2;
   string email = 3;
 
+// posee además un enum anidado con 4 posibles valores, que utilizamos como ejemplo de enum.
   enum PhoneType {
     PHONE_TYPE_UNSPECIFIED = 0;
     PHONE_TYPE_MOBILE = 1;
@@ -12,14 +15,17 @@ message Person {
     PHONE_TYPE_WORK = 3;
   }
 
+// posee un modelo anidado para números de teléfono de la persona (con número y tipo siguiendo el enum anterior).
   message PhoneNumber {
     string number = 1;
     PhoneType type = 2;
   }
 
+// posee un array para los números de teléfono que utiliza el modelo anidado anterior, que utilizamos como ejemplo de array.
   repeated PhoneNumber phones = 4;
 }
 
+// finalmente un modelo que posee un array de tipo personas siguiendo el modelo anteriormente definido.
 message AddressBook {
   repeated Person people = 1;
 }

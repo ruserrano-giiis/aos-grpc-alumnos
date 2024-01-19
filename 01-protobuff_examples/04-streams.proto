@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+// este cuarto ejemplo se utiliza para mostrar el uso de los flujos de mensajes (stream) siendo unidireccionales y bidireccionales.
+// declara un servicio con 3 métodos usando flujos (unidireccionales de un lado y otro y bidireccionales).
+
 service SensorService {
   // Stream de servidor
   rpc GetTemperature(TemperatureRequest) returns (stream TemperatureReading);
@@ -8,6 +11,8 @@ service SensorService {
   // Stream bidireccional
   rpc CheckActuatorStatus(stream SensorTemperatureReading) returns (stream ActuatorStatus);
 }
+
+// aqui los tipos de mensajes utilizados, igual que en los ejemplos anteriores,.
 
 message TemperatureRequest {
   int32 sensorId = 1;
