@@ -20,11 +20,14 @@ application {
 }
 
 dependencies {
+    // Módulo protos con el código generado
     implementation project(":protos")
+    // Dependencias de grpc
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"
     implementation "io.grpc:grpc-services:${grpcVersion}"
     implementation "io.grpc:grpc-stub:${grpcVersion}"
 
+    // Implementación de grpc
     runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
 
     testImplementation platform('org.junit:junit-bom:5.9.1')

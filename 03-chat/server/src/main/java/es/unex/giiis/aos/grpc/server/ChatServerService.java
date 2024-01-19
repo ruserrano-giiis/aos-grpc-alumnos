@@ -10,6 +10,7 @@ import io.grpc.stub.StreamObserver;
 
 import java.util.*;
 
+/** Clase que gestiona la lógica del chat no relacionada con grpc */
 public class ChatServerService {
     private static ChatServerService instance = null;
 

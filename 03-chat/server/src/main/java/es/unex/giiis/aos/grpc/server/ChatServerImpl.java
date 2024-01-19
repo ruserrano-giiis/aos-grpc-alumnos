@@ -5,6 +5,7 @@ import es.unex.giiis.aos.grpc.generated.ChatServiceGrpc;
 import io.grpc.StatusException;
 import io.grpc.stub.StreamObserver;
 
+/** Implementación del servicio grpc */
 public class ChatServerImpl extends ChatServiceGrpc.ChatServiceImplBase {
 
     private final ChatServerService service = ChatServerService.get();

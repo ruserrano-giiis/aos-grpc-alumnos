@@ -9,11 +9,11 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        /* The port on which the server should run */
+        // Inicialización del servidor haciendo uso de la implementación por defecto
         int port = 50051;
         final Server server = Grpc.newServerBuilderForPort(port, InsecureServerCredentials.create())
                 .addService(ProtoReflectionService.newInstance())
-                .addService(new ExampleServiceImpl())
+                .addService(new ExampleServiceImpl()) // Se configura la implementación del servicio en el servidor
                 .build()
                 .start();
         server.awaitTermination();

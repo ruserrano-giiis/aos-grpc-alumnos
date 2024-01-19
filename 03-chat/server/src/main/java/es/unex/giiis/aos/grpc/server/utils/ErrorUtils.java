@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class ErrorUtils {
+    /** Método de utilidad para construir errores */
     public static StatusException buildError(String message, com.google.rpc.Code code, ErrorInfo... errors) {
         return StatusProto.toStatusException(Status.newBuilder()
                 .setCode(code.getNumber())
